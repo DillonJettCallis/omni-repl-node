@@ -1,0 +1,9 @@
+{
+  "presets": ["latest-minimal"],
+  "plugins": ["transform-runtime", "transform-object-rest-spread", "transform-class-properties"],
+  "env": {
+    "production": {
+      "presets": ["babili"]
+    }
+  }
+}
