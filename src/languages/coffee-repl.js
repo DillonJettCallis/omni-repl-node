@@ -1,5 +1,5 @@
 import coffee from 'coffee-script'
-import BaseRepl from './base-repl'
+import BaseRepl from '../base-repl'
 
 export default class CoffeeRepl extends BaseRepl{
 

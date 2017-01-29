@@ -1,8 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
 import uuid from 'node-uuid'
-import JsRepl from './js-repl'
-import CoffeeRepl from './coffee-repl'
+import BabelRepl from './languages/babel-repl'
+import CoffeeRepl from './languages/coffee-repl'
+import TypescriptRepl from './languages/typescript-repl'
 
 const app = express()
 
@@ -16,8 +17,9 @@ app.use(function (req, res, next) {
 });
 
 let languages = {
-    javascript: JsRepl,
-    coffeescript: CoffeeRepl
+    javascript: BabelRepl,
+    coffeescript: CoffeeRepl,
+    typescript: TypescriptRepl
 }
 
 let sessionMap = {}

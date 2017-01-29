@@ -1,7 +1,7 @@
 import * as babel from 'babel-core'
-import BaseRepl from './base-repl'
+import BaseRepl from '../base-repl'
 
-export default class JsRepl extends BaseRepl {
+export default class BabelRepl extends BaseRepl {
 
     constructor() {
         super()
