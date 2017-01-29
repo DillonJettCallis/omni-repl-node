@@ -1,7 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 import uuid from 'node-uuid'
-import ReplSession from './repl-session'
+import JsRepl from './js-repl'
+import CoffeeRepl from './coffee-repl'
 
 const app = express()
 
@@ -14,13 +15,27 @@ app.use(function (req, res, next) {
     next();
 });
 
+let languages = {
+    javascript: JsRepl,
+    coffeescript: CoffeeRepl
+}
+
 let sessionMap = {}
 
-app.get('/session', (req, res) => {
+app.get('/session/:lang', (req, res) => {
+
+    let lang = req.params.lang
+    let repl = languages[lang]
+
+    if(!repl) {
+        res.send(`Language: ${lang} not supported`)
+        res.end()
+        return
+    }
 
     let sessionId = uuid.v4()
 
-    sessionMap[sessionId] = new ReplSession()
+    sessionMap[sessionId] = new repl()
 
     res.send({ sessionId })
     res.end()

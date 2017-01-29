@@ -1,6 +1,6 @@
 import vm from "vm";
 
-export default class ReplSession {
+export default class BaseRepl {
 
     execute;
 
@@ -30,15 +30,21 @@ export default class ReplSession {
             try {
                 let result = vm.runInContext(input, context, {filename: 'repl', displayErrors: true, timeout: 1000 * 60})
 
-                console.log(result)
+                //Result may be a promise. If it is, then using resolve will wait until
+                // it's finished to return, otherwise it does no harm.
+                Promise.resolve(result).then(result => {
+                    console.log(result)
 
-                let body = JSON.stringify(result)
+                    let body = JSON.stringify(result)
 
-                let message = consoleOutput + body
+                    let message = consoleOutput + body
 
-                consoleOutput = ''
+                    consoleOutput = ''
 
-                callback({message})
+                    callback({message})
+                })
+
+
             } catch (err) {
                 console.log(err)
 
