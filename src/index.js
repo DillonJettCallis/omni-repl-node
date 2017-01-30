@@ -4,6 +4,7 @@ import uuid from 'node-uuid'
 import BabelRepl from './languages/babel-repl'
 import CoffeeRepl from './languages/coffee-repl'
 import TypescriptRepl from './languages/typescript-repl'
+import ClojureRepl from './languages/clojure-repl'
 
 const app = express()
 
@@ -19,7 +20,8 @@ app.use(function (req, res, next) {
 let languages = {
     javascript: BabelRepl,
     coffeescript: CoffeeRepl,
-    typescript: TypescriptRepl
+    typescript: TypescriptRepl,
+    clojurescript: ClojureRepl
 }
 
 let sessionMap = {}
